@@ -3,5 +3,5 @@ import generatePasswordReducer from './generate-password-reducer';
 
 
 export default combineReducers({
-    password: generatePasswordReducer
+    passwords: generatePasswordReducer
 });

@@ -31,6 +31,7 @@ class GeneratePassword extends Component {
     render() {
         return(
             <div style={styles.containerHome}>
+                <h1>{this.props.passwords}</h1>
                 <form style={styles.submitForm} onSubmit={this.handleSubmit}>
                      <label>
                          Password Length:
@@ -57,9 +58,9 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
-     return {
-         password: state.generatePasswordReducer
-      }
+    return {
+        passwords: state.passwords
+     }
 }
 
 const matchDispatchToProps = (dispatch) => {
