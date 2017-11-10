@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { GENERATE_PASSWORD } FROM '../actions';
+import { GENERATE_PASSWORD } from '../actions/index';
 
-const GeneratePasswordReducer = (state = [], action){
+const generatePasswordReducer = (state = [], action) => {
+
     switch(action.type){
+
         case GENERATE_PASSWORD:
-            console.log('generated password hit');
+            console.log(`generate password reducer hit and length is: ${action.payload}`);
+            return ' ';
+
+        default:
+            return state;
     }
+
 }
+
+export default generatePasswordReducer;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import './App.css';
+
 
 import reducers from './reducers';
 
@@ -14,7 +16,6 @@ class App extends Component {
         return (
         <Provider store={store}>
           <div className="App">
-            <h1>Hello World</h1>
             <GeneratePassword />
           </div>
         </Provider>
