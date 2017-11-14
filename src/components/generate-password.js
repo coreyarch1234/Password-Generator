@@ -11,24 +11,31 @@ class GeneratePassword extends Component {
         super(props);
 
         this.state = {
-            length: '',
-            passwords: null
+            // length: 0,
+            // name: '',
+            passwords: null,
+            passwordData: {length: '', name: ''}
         }
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
-    handleChange(event) {
-        this.setState({length: event.target.value});
+    handleChange(propertyName, event) {
+        //this will contain the object with length and name
+        const passwordData = this.state.passwordData;
+        console.log(passwordData);
+        //the event.target.value will change depending on whether the length or name box is being typed
+        //set the length to the object value with that key and same for name
+        passwordData[propertyName] = event.target.value;
+        //this will contain, {length: '5', name: 'corey'}
+        this.setState({ passwordData: passwordData });
     }
+
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.generatePassword(this.state.length); //add new password to state
-        console.log(`updated passwords`);
-        this.setState({passwords: this.props.passwords}); //update passwords state array
+
+        this.props.generatePassword(this.state.passwordData.length); //add new password to state
+        this.setState({passwords: this.props.passwords, passwordData: {length: '', name: ''}}); //update passwords state array
     }
 
     showPasswords(){
@@ -41,17 +48,18 @@ class GeneratePassword extends Component {
         }
     }
 
-
     render() {
         return(
             <div style={styles.containerHome}>
-                <h1 style = {styles.label}>Password Length</h1>
-                <form  style={styles.submitForm} onSubmit={this.handleSubmit}>
+                <h1 style={styles.label}>Password Generator</h1>
+                <form  style={styles.submitForm} onSubmit={this.handleSubmit.bind(this)}>
                     <div>
-                        <input  style={styles.formInput} type="text" value={this.state.length} onChange={this.handleChange} />
+                        <input  style={styles.formInput} placeholder='  Password Length' type="text" value={this.state.passwordData.length} onChange={this.handleChange.bind(this, 'length')} />
+                        <input  style={styles.formInput} placeholder='  Password Name' type="text" value={this.state.passwordData.name} onChange={this.handleChange.bind(this, 'name')} />
                         <input  style={styles.submitButton} type="submit" value="Submit" />
                     </div>
                 </form>
+
                 <div>
                     {this.showPasswords()}
                 </div>
@@ -76,21 +84,22 @@ const styles = {
         font: 'arial',
         fontSize: 25,
         top: 30,
-        left: 440,
+        left: 425,
         margin: 'auto',
         position: 'absolute'
     },
     submitForm: {
-        padding: 50,
-        top: 20,
-        position: 'relative'
+        paddingTop: 50,
+        paddingBottom: 10,
+        top: 30,
+        position: 'relative',
     },
     formInput: {
         backgroundColor: 'white',
         border: 'none',
         height: 47,
         width: 100,
-        top: 200
+        top: 100,
 
     },
     submitButton: {
