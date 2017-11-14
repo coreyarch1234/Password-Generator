@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { generatePassword } from '../actions';
 
+import {RadioGroup, Radio} from 'react-radio-group'
+
 import PasswordList from './password-list';
 
 class GeneratePassword extends Component {
@@ -11,7 +13,7 @@ class GeneratePassword extends Component {
         super(props);
 
         this.state = {
-            passwordData: {length: '', name: ''}
+            passwordData: {length: '', name: '', selectedValue: ''},
         }
 
     }
@@ -22,19 +24,23 @@ class GeneratePassword extends Component {
 
         //the event.target.value will change depending on whether the length or name box is being typed
         //set the length to the object value with that key and same for name
-        passwordData[propertyName] = event.target.value;
+        if (propertyName == 'range') {
+            passwordData[propertyName] = event;
+            console.log(`the value is: ${event}`);
+        }else{
+            passwordData[propertyName] = event.target.value;
+        }
 
-        //this will contain, {length: '5', name: 'corey'}
+        //this will contain, {length: '5', name: 'corey', selectedValue: 'rangeShort'}
         this.setState({ passwordData: passwordData });
     }
-
 
     handleSubmit(event) {
         event.preventDefault();
         console.log(`to submit: ${this.state.passwordData.length}:: ${this.state.passwordData.name}`)
 
         this.props.generatePassword(this.state.passwordData.length, this.state.passwordData.name);
-        this.setState({passwordData: {length: '', name: ''}}); //update passwords state array
+        this.setState({passwordData: { length: '', name: '', selectedValue: '' }}); //update passwords state array
     }
 
 
@@ -43,6 +49,22 @@ class GeneratePassword extends Component {
             <div style={styles.containerHome}>
                 <h1 style={styles.label}>Password Generator</h1>
                 <form  style={styles.submitForm} onSubmit={this.handleSubmit.bind(this)}>
+                    <RadioGroup
+                        name="passwordLength"
+                        selectedValue={this.state.selectedValue}
+                        onChange={this.handleChange.bind(this, 'range')}>
+                        <label style={{paddingRight: 10, color:'green', fontSize: 25}}>
+                          <Radio value="rangeShort" />6 - 8
+                        </label>
+                        <label style={{paddingRight: 10, color:'yellow', fontSize: 25}}>
+                          <Radio value="rangeMedium" />9 - 12
+                        </label>
+                        <label style={{paddingRight: 10, color:'red', fontSize: 25}}>
+                          <Radio value="rangeLong" />13 - 18
+                        </label>
+                    </RadioGroup>
+                    <br/>
+
                     <div>
                         <input  style={styles.formInput} placeholder='  Password Length' type="text" value={this.state.passwordData.length} onChange={this.handleChange.bind(this, 'length')} />
                     </div>
@@ -50,11 +72,15 @@ class GeneratePassword extends Component {
                     <div>
                         <input  style={styles.formInput} placeholder='  Password Name' type="text" value={this.state.passwordData.name} onChange={this.handleChange.bind(this, 'name')} />
                     </div>
+
+
+
                     <div>
                     <br/>
                         <input  style={styles.submitButton} type="submit" value="Submit" />
                     </div>
                 </form>
+
 
                 <div style={{paddingTop:30}}>
                     <PasswordList passwords={this.props.passwords}/>
