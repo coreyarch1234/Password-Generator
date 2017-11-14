@@ -8,6 +8,8 @@ class PasswordList extends Component {
 
     makeList() {
         return this.props.passwords.map((password, index) => {
+            console.log('the return password');
+            console.log(password);
             return (
                 <div key={index}>
 

@@ -11,9 +11,6 @@ class GeneratePassword extends Component {
         super(props);
 
         this.state = {
-            // length: 0,
-            // name: '',
-            passwords: null,
             passwordData: {length: '', name: ''}
         }
 
@@ -22,10 +19,11 @@ class GeneratePassword extends Component {
     handleChange(propertyName, event) {
         //this will contain the object with length and name
         const passwordData = this.state.passwordData;
-        console.log(passwordData);
+
         //the event.target.value will change depending on whether the length or name box is being typed
         //set the length to the object value with that key and same for name
         passwordData[propertyName] = event.target.value;
+
         //this will contain, {length: '5', name: 'corey'}
         this.setState({ passwordData: passwordData });
     }
@@ -33,20 +31,12 @@ class GeneratePassword extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(`to submit: ${this.state.passwordData.length}:: ${this.state.passwordData.name}`)
 
-        this.props.generatePassword(this.state.passwordData.length); //add new password to state
-        this.setState({passwords: this.props.passwords, passwordData: {length: '', name: ''}}); //update passwords state array
+        this.props.generatePassword(this.state.passwordData.length, this.state.passwordData.name);
+        this.setState({passwordData: {length: '', name: ''}}); //update passwords state array
     }
 
-    showPasswords(){
-        if (this.state.passwords !== null){
-            return (
-                <PasswordList passwords={this.state.passwords}/>
-            )
-        }else{
-            return <h1> </h1>
-        }
-    }
 
     render() {
         return(
@@ -55,13 +45,19 @@ class GeneratePassword extends Component {
                 <form  style={styles.submitForm} onSubmit={this.handleSubmit.bind(this)}>
                     <div>
                         <input  style={styles.formInput} placeholder='  Password Length' type="text" value={this.state.passwordData.length} onChange={this.handleChange.bind(this, 'length')} />
+                    </div>
+                    <br/>
+                    <div>
                         <input  style={styles.formInput} placeholder='  Password Name' type="text" value={this.state.passwordData.name} onChange={this.handleChange.bind(this, 'name')} />
+                    </div>
+                    <div>
+                    <br/>
                         <input  style={styles.submitButton} type="submit" value="Submit" />
                     </div>
                 </form>
 
-                <div>
-                    {this.showPasswords()}
+                <div style={{paddingTop:30}}>
+                    <PasswordList passwords={this.props.passwords}/>
                 </div>
             </div>
         )
@@ -98,7 +94,7 @@ const styles = {
         backgroundColor: 'white',
         border: 'none',
         height: 47,
-        width: 100,
+        width: 200,
         top: 100,
 
     },
@@ -110,12 +106,14 @@ const styles = {
         width: 100,
         font: 'arial',
         fontSize: 15,
-        textShadow:'none'
-    }
+        textShadow:'none',
+    },
 }
 
 
 const mapStateToProps = (state) => {
+    console.log('state passwords:');
+    console.log(state.passwords);
     return {
         passwords: state.passwords
      }
