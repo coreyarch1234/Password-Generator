@@ -9,14 +9,17 @@ class Password extends Component {
     render() {
         return (
             <div>
-                <h1>{this.props.password}</h1>
+                <h1 style={styles.password}>{this.props.password}</h1>
             </div>
         );
     }
 }
 
 const styles = {
-
+    password: {
+        fontSize: 22,
+        padding: 10
+    }
 }
 
 export default Password;

@@ -13,7 +13,7 @@ What you have so far:
 
 Todo:
 
-1) Display hardcoded password that is created in the password list
+1) Display hardcoded password that is created in the password list (**DONE**)
 2) Add a name and description field in addition to the password length field to generate
 3) Display the password name, description and password in the view
 4) Implement feature to add new passwords with names and descriptions

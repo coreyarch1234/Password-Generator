@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import './App.css';
 
+import './App.css';
 
 import reducers from './reducers';
 
@@ -21,6 +21,10 @@ class App extends Component {
         </Provider>
       );
     }
+}
+
+const styles = {
+
 }
 
 export default App;
