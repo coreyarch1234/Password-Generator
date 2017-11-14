@@ -1,0 +1,20 @@
+Goals:
+
+1) Create new passwords with a name and description
+2) Create passwords using 2 different algorithms
+3) Show a list of passwords
+4) Edit passwords
+5) Delete passwords
+6) Persist passwords
+
+What you have so far:
+
+1) You can take in a password length and generate a hardcoded password.
+
+Todo:
+
+1) Display hardcoded password that is created in the password list
+2) Add a name and description field in addition to the password length field to generate
+3) Display the password name, description and password in the view
+4) Implement feature to add new passwords with names and descriptions
+5) Show a full list of all the passwords with their name and description
