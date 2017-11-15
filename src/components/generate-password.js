@@ -39,7 +39,7 @@ class GeneratePassword extends Component {
         event.preventDefault();
         console.log(`to submit: ${this.state.passwordData.length}:: ${this.state.passwordData.name}`)
 
-        this.props.generatePassword(this.state.passwordData.length, this.state.passwordData.name);
+        this.props.generatePassword(this.state.passwordData.length, this.state.passwordData.name, this.state.passwordData.selectedValue);
         this.setState({passwordData: { length: '', name: '', selectedValue: '' }}); //update passwords state array
     }
 
@@ -72,8 +72,6 @@ class GeneratePassword extends Component {
                     <div>
                         <input  style={styles.formInput} placeholder='  Password Name' type="text" value={this.state.passwordData.name} onChange={this.handleChange.bind(this, 'name')} />
                     </div>
-
-
 
                     <div>
                     <br/>

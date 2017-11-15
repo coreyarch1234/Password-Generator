@@ -14,14 +14,14 @@ const generatePasswordReducer = (state = [], action) => {
 
             const password = generator(passwordLength);
             const passwordName = action.payload.name;
+            const passwordRange = action.payload.range;
 
             const passwordData = {
                 password: password,
-                passwordName: passwordName
+                passwordName: passwordName,
+                passwordRange: passwordRange
             }
-            console.log('the state is: ');
-            console.log(state);
-            // return [...state, generator(passwordLength)];
+
             return [...state, passwordData];
 
         default:
