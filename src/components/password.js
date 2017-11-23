@@ -9,8 +9,10 @@ class Password extends Component {
     render() {
         return (
             <div>
-                <h1 style={styles.name} >*{`${this.props.password.passwordName}`}*</h1>
-                <h1 style={styles.password} >---{`${this.props.password.password}`}---</h1>
+                <h1 style={styles.name}>{`${this.props.password.passwordName}`}</h1>
+                <h1 style={styles.password}>{`${this.props.password.password}`}</h1>
+                <h1 style={styles.description}>{`${this.props.password.passwordDescription}`}</h1>
+                <h1 style={{color: 'green'}}>**</h1>
             </div>
         );
     }
@@ -29,6 +31,12 @@ const styles = {
         fontSize: 20,
         color: 'white',
         fontStyle: 'italic'
+    },
+    description: {
+        // padding: 10,
+        font: 'arial',
+        fontSize: 15,
+        color: 'white',
     }
 }
 

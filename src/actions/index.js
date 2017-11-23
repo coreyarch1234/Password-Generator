@@ -1,12 +1,12 @@
 export const GENERATE_PASSWORD = 'GENERATE_PASSWORD';
 
-export const generatePassword = (name, range) => {
+export const generatePassword = (name, range, description) => {
     return {
         type: GENERATE_PASSWORD,
         payload: {
             name: name,
-            range: range
+            range: range,
+            description: description
         }
-        // payload: length
     }
 }

@@ -7,12 +7,11 @@ const generatePasswordReducer = (state = [], action) => {
     switch(action.type){
 
         case GENERATE_PASSWORD:
-            // console.log(`generate password reducer hit and length is: ${action.payload}`);
 
             const passwordLength = action.payload.length;
-            // const passwordLength = action.payload;
             const passwordName = action.payload.name;
             const passwordRange = action.payload.range;
+            const passwordDescription = action.payload.description;
 
             const password = generator(passwordRange);
 
@@ -20,7 +19,8 @@ const generatePasswordReducer = (state = [], action) => {
             const passwordData = {
                 password: password,
                 passwordName: passwordName,
-                passwordRange: passwordRange
+                passwordRange: passwordRange,
+                passwordDescription: passwordDescription
             }
 
             return [...state, passwordData];

@@ -13,7 +13,7 @@ class GeneratePassword extends Component {
         super(props);
 
         this.state = {
-            passwordData: {name: '', range: ''},
+            passwordData: {name: '', range: '', description: ''},
         }
 
     }
@@ -39,8 +39,8 @@ class GeneratePassword extends Component {
         event.preventDefault();
         console.log(`to submit: ${this.state.passwordData.length}:: ${this.state.passwordData.name}`)
 
-        this.props.generatePassword(this.state.passwordData.name, this.state.passwordData.range);
-        this.setState({passwordData: {name: '', range: '' }}); //update passwords state array
+        this.props.generatePassword(this.state.passwordData.name, this.state.passwordData.range, this.state.passwordData.description);
+        this.setState({passwordData: {name: '', range: '', description: '' }}); //update passwords state array
     }
 
 
@@ -66,6 +66,10 @@ class GeneratePassword extends Component {
 
                     <div>
                         <input  style={styles.nameInput} placeholder='  Password Name' type="text" value={this.state.passwordData.name} onChange={this.handleChange.bind(this, 'name')} />
+                    </div>
+
+                    <div>
+                        <input  style={styles.nameInput} placeholder='  Description' type="text" value={this.state.passwordData.description} onChange={this.handleChange.bind(this, 'description')} />
                     </div>
 
                     <div>
@@ -109,7 +113,7 @@ const styles = {
         height: 47,
         width: 200,
         marginBottom: 25,
-        marginTop: 25
+        marginTop: 25,
 
     },
     submitButton: {
