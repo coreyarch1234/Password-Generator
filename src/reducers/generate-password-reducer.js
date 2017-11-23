@@ -11,10 +11,11 @@ const generatePasswordReducer = (state = [], action) => {
 
             const passwordLength = action.payload.length;
             // const passwordLength = action.payload;
-
-            const password = generator(passwordLength);
             const passwordName = action.payload.name;
             const passwordRange = action.payload.range;
+
+            const password = generator(passwordRange);
+
 
             const passwordData = {
                 password: password,

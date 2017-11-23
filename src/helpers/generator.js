@@ -1,44 +1,45 @@
-//take in a password length and generate a password using a set symbol list
 
-// module.exports = (passwordLength) => {
-//
-//     return 'THIsPassWrdIsdebst123';
-// }
 
-// export const RANGE_LONG = 26
+const getRange = (range) => {
+    switch(range){
+        case 'rangeShort':
+            //password length between 6 and 8
+            return Math.floor(Math.random() * (8 - 4) + 4);
+        case 'rangeMedium':
+            //password length between 9 and 12
+            return Math.floor(Math.random() * (13 - 9) + 9);
+        case 'rangeLong':
+            //password length between 13 and 18
+            return Math.floor(Math.random() * (17 - 13) + 13);
+        default:
+            return 8
+    }
 
-// export const getRange = () => {
-//     //..
-// }
+}
 
 
 module.exports = (range) => {
 
 
     const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var passwordLength = getRange(range);
+    console.log(`the password length is: ${range}`);
+    console.log(`the password range number is: ${passwordLength}`);
+
+
     let password = '';
-    const passwordLength = alphabet.length;
 
     for (var i = 0; i < passwordLength; i++){
-        var randIndex = Math.floor(Math.random() * (passwordLength - 1) + 1);
+        var min = passwordLength - 4;
+        var max = passwordLength;
+
+        var randIndex = Math.floor(Math.random() * (max - min) + min);
+
         let char = alphabet[randIndex];
+
         password += char;
-        console.log(`the index character is: ${alphabet[randIndex]}`)
-        console.log(char, randIndex, passwordLength);
+
     }
-    console.log(`the password is: ${password}`)
-    // return 'THIsPassWrdIsdebst123';
+
     return password
 }
-
-// import random
-//
-// alphabet = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-// pw_length = 8
-// mypw = ""
-//
-// for i in range(pw_length):
-//     next_index = random.randrange(len(alphabet))
-//     mypw = mypw + alphabet[next_index]
-//
-// print(mypw)

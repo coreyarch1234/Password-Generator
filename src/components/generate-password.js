@@ -13,7 +13,7 @@ class GeneratePassword extends Component {
         super(props);
 
         this.state = {
-            passwordData: {length: '', name: '', selectedValue: ''},
+            passwordData: {name: '', range: ''},
         }
 
     }
@@ -39,8 +39,8 @@ class GeneratePassword extends Component {
         event.preventDefault();
         console.log(`to submit: ${this.state.passwordData.length}:: ${this.state.passwordData.name}`)
 
-        this.props.generatePassword(this.state.passwordData.length, this.state.passwordData.name, this.state.passwordData.selectedValue);
-        this.setState({passwordData: { length: '', name: '', selectedValue: '' }}); //update passwords state array
+        this.props.generatePassword(this.state.passwordData.name, this.state.passwordData.range);
+        this.setState({passwordData: {name: '', range: '' }}); //update passwords state array
     }
 
 
@@ -48,37 +48,31 @@ class GeneratePassword extends Component {
         return(
             <div style={styles.containerHome}>
                 <h1 style={styles.label}>Password Generator</h1>
-                <form  style={styles.submitForm} onSubmit={this.handleSubmit.bind(this)}>
+                <form style={styles.submitForm} onSubmit={this.handleSubmit.bind(this)}>
                     <RadioGroup
                         name="passwordLength"
-                        selectedValue={this.state.selectedValue}
+                        selectedValue={this.state.range}
                         onChange={this.handleChange.bind(this, 'range')}>
                         <label style={{paddingRight: 10, color:'green', fontSize: 25}}>
-                          <Radio value="rangeShort" />6 - 8
+                          <Radio value="rangeShort" />4 - 8
                         </label>
                         <label style={{paddingRight: 10, color:'yellow', fontSize: 25}}>
-                          <Radio value="rangeMedium" />9 - 12
+                          <Radio value="rangeMedium" />9 - 13
                         </label>
                         <label style={{paddingRight: 10, color:'red', fontSize: 25}}>
-                          <Radio value="rangeLong" />13 - 18
+                          <Radio value="rangeLong" />13 - 17
                         </label>
                     </RadioGroup>
-                    <br/>
 
                     <div>
-                        <input  style={styles.formInput} placeholder='  Password Length' type="text" value={this.state.passwordData.length} onChange={this.handleChange.bind(this, 'length')} />
-                    </div>
-                    <br/>
-                    <div>
-                        <input  style={styles.formInput} placeholder='  Password Name' type="text" value={this.state.passwordData.name} onChange={this.handleChange.bind(this, 'name')} />
+                        <input  style={styles.nameInput} placeholder='  Password Name' type="text" value={this.state.passwordData.name} onChange={this.handleChange.bind(this, 'name')} />
                     </div>
 
                     <div>
-                    <br/>
                         <input  style={styles.submitButton} type="submit" value="Submit" />
                     </div>
-                </form>
 
+                </form>
 
                 <div style={{paddingTop:30}}>
                     <PasswordList passwords={this.props.passwords}/>
@@ -97,29 +91,25 @@ const styles = {
         justifyContent: 'center',
         height: 1000,
         backgroundColor: '#273E47',
-        position: 'relative'
     },
     label: {
         color: 'white',
         font: 'arial',
         fontSize: 25,
-        top: 30,
-        left: 425,
         margin: 'auto',
-        position: 'absolute'
+        paddingTop: 25
     },
     submitForm: {
         paddingTop: 50,
         paddingBottom: 10,
-        top: 30,
-        position: 'relative',
     },
-    formInput: {
+    nameInput: {
         backgroundColor: 'white',
         border: 'none',
         height: 47,
         width: 200,
-        top: 100,
+        marginBottom: 25,
+        marginTop: 25
 
     },
     submitButton: {
