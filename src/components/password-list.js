@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { deletePassword } from '../actions/index';
+
 import Password from './password';
 
 class PasswordList extends Component {
@@ -16,6 +18,9 @@ class PasswordList extends Component {
                     <Password
                         key={index}
                         password={password}
+                        onDelete ={() =>{
+                            this.props.deletePassword(index);
+                        }}
 
                     />
 
@@ -37,17 +42,17 @@ const styles = {
 
 }
 
-export default PasswordList;
-// const mapStateToProps = (state) => {
-//     return {
-//         passwords: state.passwords
-//      }
-// }
-//
-// const matchDispatchToProps = (dispatch) => {
-//     return bindActionCreators({
-//         generatePassword: generatePassword
-//     }, dispatch);
-// }
-//
-// export default connect(mapStateToProps, matchDispatchToProps)(PasswordList);
+// export default PasswordList;
+const mapStateToProps = (state) => {
+    return {
+        passwords: state.passwords
+     }
+}
+
+const matchDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        deletePassword: deletePassword
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(PasswordList);

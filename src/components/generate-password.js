@@ -62,7 +62,9 @@ class GeneratePassword extends Component {
 
         this.setState({
             passwordData:
-            {name: '', range: '', description: '' }
+            {name: '', range: '', description: '' },
+            password: ''
+
         }); //update passwords state array
     }
 

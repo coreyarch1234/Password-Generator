@@ -12,6 +12,11 @@ class Password extends Component {
                 <h1 style={styles.name}>{`${this.props.password.passwordName}`}</h1>
                 <h1 style={styles.password}>{`${this.props.password.password}`}</h1>
                 <h1 style={styles.description}>{`${this.props.password.passwordDescription}`}</h1>
+
+                <button  onClick={() => {
+                  this.props.onDelete();
+                }}>DELETE</button>
+
                 <h1 style={{color: 'green'}}>**</h1>
             </div>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GENERATE_PASSWORD } from '../actions/index';
+import { GENERATE_PASSWORD, DELETE_PASSWORD } from '../actions/index';
 import generator from '../helpers/generator'; //algorithm
 
 const generatePasswordReducer = (state = [], action) => {
@@ -24,6 +24,16 @@ const generatePasswordReducer = (state = [], action) => {
             }
 
             return [...state, passwordData];
+
+        case DELETE_PASSWORD:
+
+            const passwordKey = action.payload;
+            var newState = state;
+            newState.splice(action.payload, 1);
+            return newState.map((password, index) => {
+                return password;
+            });
+
 
         default:
             return state;
