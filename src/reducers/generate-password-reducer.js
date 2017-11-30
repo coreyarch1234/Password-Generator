@@ -8,12 +8,12 @@ const generatePasswordReducer = (state = [], action) => {
 
         case GENERATE_PASSWORD:
 
-            const passwordLength = action.payload.length;
             const passwordName = action.payload.name;
-            const passwordRange = action.payload.range;
+            const passwordRange = action.payload.range; // !!!!
             const passwordDescription = action.payload.description;
 
-            const password = generator(passwordRange);
+            const password = action.payload.password; // !!!!!
+            // const password = generator(passwordRange); // !!!!!
 
 
             const passwordData = {

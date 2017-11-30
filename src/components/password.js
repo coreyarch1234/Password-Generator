@@ -23,20 +23,20 @@ const styles = {
         // padding: 10,
         font: 'arial',
         fontSize: 25,
-        color: 'white',
+        color: 'black',
     },
     password: {
         // padding: 10,
         font: 'arial',
         fontSize: 20,
-        color: 'white',
+        color: 'purple',
         fontStyle: 'italic'
     },
     description: {
         // padding: 10,
         font: 'arial',
         fontSize: 15,
-        color: 'white',
+        color: 'blue',
     }
 }
 

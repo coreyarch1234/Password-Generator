@@ -17,11 +17,9 @@ const getRange = (range) => {
 
 }
 
+export const generateMethodOne = (range) => {
 
-module.exports = (range) => {
-
-
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+';
     var passwordLength = getRange(range);
     console.log(`the password length is: ${range}`);
     console.log(`the password range number is: ${passwordLength}`);
@@ -42,4 +40,38 @@ module.exports = (range) => {
     }
 
     return password
+
 }
+
+
+
+// const generateMethodTwo = (length) => {
+//
+//     const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+';
+//     var passwordLength = getRange(range);
+//     console.log(`the password length is: ${range}`);
+//     console.log(`the password range number is: ${passwordLength}`);
+//
+//
+//     let password = '';
+//
+//     for (var i = 0; i < passwordLength; i++){
+//         var min = passwordLength - 4;
+//         var max = passwordLength;
+//
+//         var randIndex = Math.floor(Math.random() * (max - min) + min);
+//
+//         let char = alphabet[randIndex];
+//
+//         password += char;
+//
+//     }
+//
+//     return password
+//
+// }
+
+
+// module.exports = (range) => {
+//      return generateMethodOne(range);
+// }
