@@ -5,7 +5,7 @@ import { generatePassword } from '../actions';
 
 import {RadioGroup, Radio} from 'react-radio-group'
 
-import { generateMethodOne } from '../helpers/generator'
+import { generateMethodOne, generateMethodTwo } from '../helpers/generator'
 
 import PasswordList from './password-list';
 
@@ -31,41 +31,83 @@ class GeneratePassword extends Component {
         //set the length to the object value with that key and same for name
         if (propertyName == 'range') {
             passwordData[propertyName] = event;
-            console.log(`the value is: ${event}`);
         }else{
             passwordData[propertyName] = event.target.value;
+
+            if (propertyName === 'name') {
+                var nameIsValid = event.target.value === '' ? false: true;
+                if (nameIsValid){
+                    this.setState({ passwordData: passwordData, nameIsValid: nameIsValid});
+                }else{
+                    this.setState({ passwordData:{name: '', range: '', description: '' }, password: '', nameIsValid: nameIsValid});
+                }
+            }
+            else if (propertyName === 'description'){
+                var descriptionIsValid = event.target.value === '' ? false: true;
+                if (descriptionIsValid){
+                    this.setState({ passwordData: passwordData, descriptionIsValid: descriptionIsValid });
+                }else{
+                    this.setState({ passwordData:{name: '', range: '', description: '' }, password: '', descriptionIsValid});
+                }
+            }
+
         }
 
-        //this will contain, {length: '5', name: 'corey', selectedValue: 'rangeShort'}
-        // Validate
-        // check length of name if 0 then isValid = false : isValid true
-        var nameIsValid = this.state.name === '' ? false: true;
-        var descriptionIsValid = this.state.name === '' ? false: true;
-
-        this.setState({ passwordData: passwordData, nameIsValid: nameIsValid, descriptionIsValid: descriptionIsValid });
     }
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(`the name is valid is for submit: ${this.state.nameIsValid}`)
 
-        // Validate name and descriptions and password
-        if (!this.state.nameIsValid || !this.state.descriptionIsValid) {
+        // // Validate name and descriptions and password
+        if (this.state.nameIsValid === false || this.state.descriptionIsValid === false) {
             return
+        }else{
+
+            if (this.state.password === ''){
+                var password = generateMethodOne(this.state.passwordData.range);
+                this.props.generatePassword(this.state.passwordData.name,
+                    this.state.passwordData.range,
+                    this.state.passwordData.description,
+                    password);
+                    this.setState({
+                        passwordData:
+                        {name: '', range: '', description: '' },
+                        password: '',
+                        nameIsValid: false,
+                        descriptionIsValid: false
+
+                    }); //update passwords state array
+            }else{
+                this.props.generatePassword(this.state.passwordData.name,
+                    this.state.passwordData.range,
+                    this.state.passwordData.description,
+                    this.state.password);
+
+                this.setState({
+                    passwordData:
+                    {name: '', range: '', description: '' },
+                    password: '',
+                    nameIsValid: false,
+                    descriptionIsValid: false
+
+                }); //update passwords state array
+            }
+
+            // this.props.generatePassword(this.state.passwordData.name,
+            //     this.state.passwordData.range,
+            //     this.state.passwordData.description,
+            //     this.state.password);
+            //
+            // this.setState({
+            //     passwordData:
+            //     {name: '', range: '', description: '' },
+            //     password: '',
+            //     nameIsValid: false,
+            //     descriptionIsValid: false
+            //
+            // }); //update passwords state array
         }
-
-        console.log(`to submit: ${this.state.passwordData.length}:: ${this.state.passwordData.name}`)
-
-        this.props.generatePassword(this.state.passwordData.name,
-            this.state.passwordData.range,
-            this.state.passwordData.description,
-            this.state.password);
-
-        this.setState({
-            passwordData:
-            {name: '', range: '', description: '' },
-            password: ''
-
-        }); //update passwords state array
     }
 
 
@@ -102,7 +144,7 @@ class GeneratePassword extends Component {
 
                         <button onClick={(e)=> {
                             e.preventDefault()
-                            this.setState({ password: generateMethodOne(this.state.passwordData.range) })
+                            this.setState({ password: generateMethodTwo(this.state.passwordData.range) })
                         }}
                         style={{...styles.submitButton, backgroundColor: 'green'}}>Generate 2</button>
 
